@@ -3,10 +3,14 @@ import logo from "../../assets/logo.svg";
 import avatar from "../../assets/avatar.png";
 
 function Header({ handleAddClothesBtnClick }) {
+  const currentDate = new Date().toLocaleString("default", {
+    month: "long",
+    day: "numeric",
+  });
   return (
     <header className="header">
       <img className="header__logo" src={logo} />
-      <p className="header__date-and-location">DATE, LOCATION</p>
+      <p className="header__date-and-location"> {currentDate}, LOCATION</p>
       <button
         onClick={handleAddClothesBtnClick}
         className="header__add-clothes-btn"
