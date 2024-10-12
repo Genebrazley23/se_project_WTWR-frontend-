@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import "./App.css";
 import Header from "../Header/Header";
-import Main from "../Main/MainTemp.jsx";
+import Main from "../Main/Main.jsx";
 import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
 import { defaultClothingItems } from "../../utils/constants";
 import ItemModal from "../ItemModal/ItemModal.jsx";
@@ -11,6 +11,7 @@ function App() {
   const [clothingItems, setClothingItems] = useState(defaultClothingItems);
   const [weatherData, setWeatherData] = useState({ type: "cold" });
   const [isNewClothesOpen, setIsNewClothesOpen] = useState(false);
+  const [isItemModalOpen, setIsItemModalOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
   function showNewClothesForm() {
     setIsNewClothesOpen(true);
@@ -18,8 +19,12 @@ function App() {
 
   const handleCardButton = (item) => {
     setIsNewClothesOpen("preview");
-    setClothingItems(item);
+    setSelectedCard(item);
   };
+
+  function handleCloseItemModal() {
+    setIsItemModalOpen(false);
+  }
 
   function handleCloseGarment() {
     setIsNewClothesOpen(false);
@@ -38,7 +43,12 @@ function App() {
       <div className="page__content">
         {" "}
         <Header handleAddClothesBtnClick={showNewClothesForm} />
-        <Main weatherData={weatherData} clothingItems={clothingItems} />
+        <Main
+          weatherData={weatherData}
+          clothingItems={clothingItems}
+          onCardClick={setSelectedCard}
+          handleCardButton={handleCardButton}
+        />
       </div>
       {isNewClothesOpen && (
         <ModalWithForm
@@ -46,7 +56,7 @@ function App() {
           handleCloseModal={handleCloseGarment}
         />
       )}
-      <ItemModal clothingItems={clothingItems} card={selectedCard} />
+      <ItemModal clothingItems={clothingItems} item={selectedCard} />
     </div>
   );
 }

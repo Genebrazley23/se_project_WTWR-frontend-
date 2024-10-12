@@ -9,9 +9,9 @@ function ItemModal({ clothingItems, handleClose, item }) {
           Close
         </button>{" "}
         <img className="card__image" src={item.link} alt="" />
-        <div modal__footer>
+        <div className="modal__footer">
           <h2 className="modal__caption">{item.name}</h2>
-          <p className="modal__weather">Weather:item.weather</p>
+          <p className="modal__weather">Weather:{item.weather}</p>
         </div>
       </div>
     </div>
