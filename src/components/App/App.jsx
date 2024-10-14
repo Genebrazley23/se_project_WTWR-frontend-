@@ -1,62 +1,76 @@
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
 import "./App.css";
+import { coordinates, APIkey } from "../../utils/constants";
 import Header from "../Header/Header";
 import Main from "../Main/Main.jsx";
 import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
 import { defaultClothingItems } from "../../utils/constants";
 import ItemModal from "../ItemModal/ItemModal.jsx";
+import { filterWeatherData, getWeather } from "../../utils/weatherApi.js";
 
 function App() {
   const [clothingItems, setClothingItems] = useState(defaultClothingItems);
-  const [weatherData, setWeatherData] = useState({ type: "cold" });
-  const [isNewClothesOpen, setIsNewClothesOpen] = useState(false);
-  const [isItemModalOpen, setIsItemModalOpen] = useState(false);
+  const [weatherData, setWeatherData] = useState({
+    type: "cold",
+    temp: { F: 999, C: 999 },
+    city: "",
+  });
+  const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
-  function showNewClothesForm() {
-    setIsNewClothesOpen(true);
-  }
 
-  const handleCardButton = (item) => {
-    setIsNewClothesOpen("preview");
+  const openItemModal = (item) => {
     setSelectedCard(item);
+    setActiveModal("item");
   };
 
-  function handleCloseItemModal() {
-    setIsItemModalOpen(false);
-  }
+  const showNewClothesForm = () => setActiveModal("newClothes");
 
-  function handleCloseGarment() {
-    setIsNewClothesOpen(false);
-  }
+  const closeModal = () => {
+    setActiveModal("");
+    setSelectedCard({});
+  };
 
-  function handleSubmitGarment(garment) {
+  const handleSubmitGarment = (garment) => {
     const clothingId = clothingItems.map((c) => c._id);
-    const maxId = Math.max(...clothingId);
+    const maxId = clothingId.length ? Math.max(...clothingId) : 0; // Handle case if clothingItems is empty
     garment._id = maxId + 1;
-    console.log("md2oewnodn2ew", garment);
-    setIsNewClothesOpen(false);
     setClothingItems((prev) => [...prev, garment]);
-  }
+    closeModal();
+  };
+
+  useEffect(() => {
+    getWeather(coordinates, APIkey)
+      .then((data) => {
+        const filteredData = filterWeatherData(data);
+        setWeatherData(filteredData);
+      })
+      .catch((error) => console.error(error));
+  }, []);
+
   return (
     <div className="page">
       <div className="page__content">
-        {" "}
-        <Header handleAddClothesBtnClick={showNewClothesForm} />
+        <Header
+          handleAddClothesBtnClick={showNewClothesForm}
+          weatherData={weatherData}
+        />
         <Main
           weatherData={weatherData}
           clothingItems={clothingItems}
-          onCardClick={setSelectedCard}
-          handleCardButton={handleCardButton}
+          onCardClick={openItemModal}
+          handleCardButton={openItemModal}
         />
       </div>
-      {isNewClothesOpen && (
+
+      {activeModal === "newClothes" && (
         <ModalWithForm
           handleSubmit={handleSubmitGarment}
-          handleCloseModal={handleCloseGarment}
+          handleCloseModal={closeModal}
         />
       )}
-      <ItemModal clothingItems={clothingItems} item={selectedCard} />
+      {activeModal === "item" && (
+        <ItemModal isOpen={true} item={selectedCard} handleClose={closeModal} />
+      )}
     </div>
   );
 }

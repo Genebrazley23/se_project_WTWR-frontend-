@@ -23,9 +23,13 @@
 }
 
 .modal__close {
+  background: transparent url("../../assets/CloseIcon.png") no-repeat;
+  color: rgba(0, 0, 0, 0.3);
   position: absolute;
   top: 20px;
   right: 28px;
+  width: 16px;
+  height: 16px;
 }
 
 .modal__form {

@@ -31,9 +31,11 @@ function ModalWithForm({ handleSubmit, handleCloseModal }) {
       <div className="modal__content">
         {" "}
         <h2 className="modal__title"> New garment</h2>
-        <button onClick={handleClose} type="button" className="modal__close">
-          Close
-        </button>{" "}
+        <button
+          onClick={handleClose}
+          type="button"
+          className="modal__close"
+        ></button>{" "}
         <form onSubmit={handleFormSubmit} className="modal__form">
           <label htmlFor="name" className="modal__label">
             Name {""}
