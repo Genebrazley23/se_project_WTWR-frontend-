@@ -6,10 +6,20 @@
 
 .header__logo {
   margin-right: 24px;
+  font-weight: 900;
+  size: 32px;
+  line-height: 39.68px;
+  font-family: "CabinetGroteskMed", sans-serif;
 }
 
 .header__date-and-location {
   margin: 0;
+  font-family: "CabinetGroteskMed", sans-serif;
+  font-weight: 700;
+  size: 20px;
+  line-height: 24px;
+  width: 160px;
+  height: 24px;
 }
 
 .header__add-clothes-btn {
@@ -17,6 +27,12 @@
   outline: none;
   border: none;
   background: none;
+  font-family: "CabinetGroteskMed", sans-serif;
+  font-weight: 700;
+  size: 20px;
+  line-height: 24px;
+  width: 116px;
+  height: 24px;
 }
 
 .header__user-container {
@@ -27,4 +43,5 @@
 
 .header__username {
   margin: 0;
+  font-family: "CabinetGroteskMed", sans-serif;
 }

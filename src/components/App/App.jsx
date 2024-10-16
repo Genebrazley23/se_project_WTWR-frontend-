@@ -7,6 +7,7 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
 import { defaultClothingItems } from "../../utils/constants";
 import ItemModal from "../ItemModal/ItemModal.jsx";
 import { filterWeatherData, getWeather } from "../../utils/weatherApi.js";
+import Footer from "../Footer/Footer.jsx";
 
 function App() {
   const [clothingItems, setClothingItems] = useState(defaultClothingItems);
@@ -32,7 +33,7 @@ function App() {
 
   const handleSubmitGarment = (garment) => {
     const clothingId = clothingItems.map((c) => c._id);
-    const maxId = clothingId.length ? Math.max(...clothingId) : 0; // Handle case if clothingItems is empty
+    const maxId = clothingId.length ? Math.max(...clothingId) : 0;
     garment._id = maxId + 1;
     setClothingItems((prev) => [...prev, garment]);
     closeModal();
@@ -60,6 +61,7 @@ function App() {
           onCardClick={openItemModal}
           handleCardButton={openItemModal}
         />
+        <Footer />
       </div>
 
       {activeModal === "newClothes" && (
