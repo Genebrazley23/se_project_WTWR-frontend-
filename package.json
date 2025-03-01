@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "deploy": "npm run build && scp -r ./dist/* brazley23@express.ignorelist.com:/home/brazley23/frontend",
     "predeploy": "npm run build",
-    "homepage": " https://brazley23.github.io/se_project_reactgit"
+    "homepage": "https://brazley23.github.io/se_project_reactgit"
   },
   "dependencies": {
     "react": "^18.3.1",
