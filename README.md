@@ -1,22 +1,9 @@
 # WTWR (What to Wear?)
 
-# Project 10: Weather-Based Clothing Recommendation
+
 
 This project is a **weather-based clothing recommendation app** built using **React**, **Vite**, and various frontend technologies. The app provides weather data and recommends clothing based on the current temperature.
 
-## Table of Contents
-
-- [Project Overview](#project-overview)
-- [Project Requirements](#project-requirements)
-- [Technologies and Techniques Used](#technologies-and-techniques-used)
-- [File Structure](#file-structure)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
-
----
 
 ## Project Overview
 
